@@ -1,0 +1,78 @@
+#include <iostream>
+using namespace std;
+
+// Base Class 1
+class AcademicRecord
+{
+protected:
+    int rollNo;
+    int marks;
+
+public:
+    void getAcademicDetails()
+    {
+        cout << "Enter Roll Number: ";
+        cin >> rollNo;
+        cout << "Enter Academic Marks: ";
+        cin >> marks;
+    }
+
+    void displayAcademicDetails()
+    {
+        cout << "Roll Number: " << rollNo << endl;
+        cout << "Academic Marks: " << marks << endl;
+    }
+};
+
+// Base Class 2
+class SportsRecord
+{
+protected:
+    string sportName;
+    int sportsScore;
+
+public:
+    void getSportsDetails()
+    {
+        cout << "Enter Sport Name: ";
+        cin >> sportName;
+        cout << "Enter Sports Score: ";
+        cin >> sportsScore;
+    }
+
+    void displaySportsDetails()
+    {
+        cout << "Sport Name: " << sportName << endl;
+        cout << "Sports Score: " << sportsScore << endl;
+    }
+};
+
+// Derived Class
+class Student : public AcademicRecord, public SportsRecord
+{
+public:
+    void calculateOverallPerformance()
+    {
+        int totalScore = marks + sportsScore;
+        cout << "Overall Performance Score: " << totalScore << endl;
+    }
+
+    void displayStudentDetails()
+    {
+        cout << "\nStudent Details" << endl;
+        displayAcademicDetails();
+        displaySportsDetails();
+        calculateOverallPerformance();
+    }
+};
+
+int main()
+{
+    Student s;   // One Student object
+
+    s.getAcademicDetails();
+    s.getSportsDetails();
+    s.displayStudentDetails();
+
+    return 0;
+}
