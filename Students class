@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+class Student
+{
+private:
+    int rollNo;
+    int marks;
+
+public:
+    string collegeName;   // Public data member
+
+    // Constructor to initialize private members
+    Student(int r, int m)
+    {
+        rollNo = r;
+        marks = m;
+    }
+
+    // Public member function to display details
+    void displayDetails()
+    {
+        cout << "Roll Number: " << rollNo << endl;
+        cout << "Marks: " << marks << endl;
+        cout << "College Name: " << collegeName << endl;
+        cout << endl;
+    }
+};
+
+int main()
+{
+    // Creating multiple objects
+    Student s1(101, 85);
+    Student s2(102, 90);
+
+    s1.collegeName = "ABC College";
+    s2.collegeName = "ABC College";
+
+    s1.displayDetails();
+    s2.displayDetails();
+
+    return 0;
+}
