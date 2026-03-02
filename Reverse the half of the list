@@ -1,0 +1,56 @@
+#include <iostream>
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+
+ListNode* reverseFirstHalf(ListNode* head) {
+    if (head == nullptr || head->next == nullptr) return head;
+
+    ListNode *slow = head;
+    ListNode *fast = head;
+    ListNode *prev = nullptr;
+    ListNode *temp = nullptr;
+
+    while (fast != nullptr && fast->next != nullptr) {
+        fast = fast->next->next;
+        temp = slow->next;
+        slow->next = prev;
+        prev = slow;
+        slow = temp;
+    }
+
+    head->next = slow; // Connect the end of the reversed first half to the second half
+    return prev; // The new head of the modified list
+}
+
+// Helper function to print the list
+void printList(ListNode* head) {
+    while (head != nullptr) {
+        std::cout << head->val << " ";
+        head = head->next;
+    }
+    std::cout << std::endl;
+}
+
+int main() {
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+    head->next->next->next->next = new ListNode(5);
+
+    std::cout << "Original list: ";
+    printList(head);
+
+    head = reverseFirstHalf(head);
+
+    std::cout << "List with first half reversed: ";
+    printList(head);
+
+    return 0;
+}
