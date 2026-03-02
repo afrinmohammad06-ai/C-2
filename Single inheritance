@@ -1,0 +1,30 @@
+#include <iostream>
+
+class Employee {
+protected:
+    double salary;
+public:
+    Employee(double baseSalary) : salary(baseSalary) {}
+    virtual double calculateSalary() {
+        return salary;
+    }
+};
+
+class Manager : public Employee {
+private:
+    double allowances;
+public:
+    Manager(double baseSalary, double managerAllowances) : Employee(baseSalary), allowances(managerAllowances) {}
+    double calculateSalary() override {
+        return salary + allowances;
+    }
+};
+
+int main() {
+    Employee emp(50000.0);
+    Manager mgr(60000.0, 10000.0);
+
+    std::cout << "Employee Salary: $" << emp.calculateSalary() << std::endl;
+    std::cout << "Manager Salary (including allowances): $" << mgr.calculateSalary() << std::endl;
+    return 0;
+}
