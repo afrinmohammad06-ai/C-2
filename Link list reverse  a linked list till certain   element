@@ -1,0 +1,54 @@
+#include <iostream>
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+ListNode* reverseUntil(ListNode* head, int target) {
+    if (!head) return nullptr;
+
+    ListNode *prev = nullptr;
+    ListNode *curr = head;
+    ListNode *next_node = nullptr;
+
+    while (curr != nullptr && curr->val != target) {
+        next_node = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next_node;
+    }
+
+    if (curr != nullptr && curr->val == target) {
+        // The current head of the reversed part (prev) now points to the original head.
+        // The original head needs to point to the rest of the list (curr->next).
+        // The 'curr' node (target node) stays in its position relative to the rest of the list.
+        head->next = curr->next;
+        curr->next = prev;
+        return curr; // The target node becomes the new head of the reversed segment
+    } else {
+        // Target not found, return the fully reversed list
+        return prev;
+    }
+}
+int main() {
+    ListNode* head = new ListNode(1);
+    head->next = new ListNode(2);
+    head->next->next = new ListNode(3);
+    head->next->next->next = new ListNode(4);
+    head->next->next->next->next = new ListNode(5);
+
+    std::cout << "Original list: 1 -> 2 -> 3 -> 4 -> 5" << std::endl;
+    int target = 3;
+    ListNode* newHead = reverseUntil(head, target);
+
+    std::cout << "Reversed until " << target << ": ";
+    ListNode* temp = newHead;
+    while (temp != nullptr) {
+        std::cout << temp->val << (temp->next ? " -> " : "");
+        temp = temp->next;
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
