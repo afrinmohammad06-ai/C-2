@@ -1,0 +1,28 @@
+#include <iostream>
+#include <string>
+
+class Car {
+private:
+    int speed;
+    std::string brandName;
+
+public:
+    Car(int s, std::string brand) : speed(s), brandName(brand) {}
+
+    void display() {
+        std::cout << "Brand: " << brandName << ", Current Speed: " << speed << " mph" << std::endl;
+    }
+
+    void modifySpeed(int newSpeed) {
+        speed = newSpeed;
+        std::cout << "Speed modified to " << speed << " mph" << std::endl;
+    }
+};
+
+int main() {
+    Car myCar(60, "Toyota");
+    myCar.display();
+    myCar.modifySpeed(80);
+    myCar.display();
+    return 0;
+}
