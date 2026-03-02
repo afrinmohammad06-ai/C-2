@@ -1,0 +1,55 @@
+#include <iostream>
+#include <iomanip> // For setprecision
+
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode(int x) : val(x), next(nullptr) {}
+};
+double averageFirstLastMiddle(ListNode* head) {
+    if (!head) return 0.0;
+
+    int length = 0;
+    ListNode* temp = head;
+    while (temp) {
+        length++;
+        temp = temp->next;
+    }
+
+    if (length == 0) return 0.0;
+
+    int first = head->val;
+    int last = head->val;
+    temp = head;
+    while (temp->next) {
+        temp = temp->next;
+        last = temp->val;
+    }
+
+    // Find middle element using two pointers (or iteration)
+    ListNode* slow = head;
+    ListNode* fast = head;
+    while (fast && fast->next) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    int middle = slow->val;
+
+    // Calculate average
+    double average = (static_cast<double>(first) + last + middle) / 3.0;
+    return average;
+}int main() {
+    ListNode* head = new ListNode(10);
+    head->next = new ListNode(20);
+    head->next->next = new ListNode(30);
+    head->next->next->next = new ListNode(40);
+    head->next->next->next->next = new ListNode(50);
+
+    std::cout << "List: 10 -> 20 -> 30 -> 40 -> 50" << std::endl;
+    double avg = averageFirstLastMiddle(head);
+
+    std::cout << std::fixed << std::setprecision(2);
+    std::cout << "Average of first (10), last (50), and middle (30) elements: " << avg << std::endl;
+
+    return 0;
+}
