@@ -1,0 +1,38 @@
+#include <iostream>
+#include <vector>
+
+class Employee {
+public:
+    double basicPay, hra, da;
+
+    Employee(double basic, double h, double d) : basicPay(basic), hra(h), da(d) {}
+
+    double calculateGrossSalary() {
+        return basicPay + hra + da;
+    }
+
+    void displaySalary() {
+        std::cout << "Basic Pay: $" << basicPay << ", HRA: $" << hra << ", DA: $" << da << std::endl;
+        std::cout << "Gross Salary: $" << calculateGrossSalary() << std::endl;
+    }
+};
+
+int main() {
+    Employee e1(50000.0, 10000.0, 5000.0);
+    Employee e2(65000.0, 12000.0, 6000.0);
+    Employee e3(45000.0, 8000.0, 4000.0);
+
+    std::cout << "Employee 1 Details:" << std::endl;
+    e1.displaySalary();
+    std::cout << std::endl;
+
+    std::cout << "Employee 2 Details:" << std::endl;
+    e2.displaySalary();
+    std::cout << std::endl;
+
+    std::cout << "Employee 3 Details:" << std::endl;
+    e3.displaySalary();
+    std::cout << std::endl;
+
+    return 0;
+}
