@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+Node* head = NULL;
+
+void insert(int value) {
+    Node* newNode = new Node();
+    newNode->data = value;
+    newNode->next = head;
+    head = newNode;
+}
+
+int removeDuplicatesAndSum() {
+    int sum = 0;
+    Node* current = head;
+
+    while (current != NULL) {
+        Node* prev = current;
+        Node* temp = current->next;
+
+        while (temp != NULL) {
+            if (current->data == temp->data) {
+                sum += temp->data;
+                prev->next = temp->next;
+                delete temp;
+                temp = prev->next;
+            } else {
+                prev = temp;
+                temp = temp->next;
+            }
+        }
+        current = current->next;
+    }
+    return sum;
+}
+
+void display() {
+    Node* temp = head;
+    while (temp != NULL) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+
+int main() {
+    insert(10);
+    insert(20);
+    insert(10);
+    insert(30);
+    insert(20);
+
+    cout << "Original List: ";
+    display();
+
+    int sum = removeDuplicatesAndSum();
+    cout << "Sum of deleted duplicates: " << sum << endl;
+
+    cout << "Updated List: ";
+    display();
+
+    return 0;
+}
