@@ -1,0 +1,34 @@
+#include <iostream>
+#include <vector>
+#include <numeric>
+
+class Student {
+public:
+    double sub1, sub2, sub3;
+
+    Student(double s1, double s2, double s3) : sub1(s1), sub2(s2), sub3(s3) {}
+
+    double average() {
+        return (sub1 + sub2 + sub3) / 3.0;
+    }
+
+    double percentage() {
+        // Assuming each subject is out of a certain total, 
+        // but the problem says "out of 100" for the final percentage.
+        // If subjects are also out of 100, percentage is same as average.
+        // Let's assume the percentage is (Total Marks / 300) * 100
+        return ((sub1 + sub2 + sub3) / 300.0) * 100.0;
+    }
+};
+
+int main() {
+    Student s1(85.5, 90.0, 78.5);
+    Student s2(72.0, 65.5, 80.0);
+    Student s3(92.5, 88.0, 95.0);
+
+    std::cout << "Student 1 Average: " << s1.average() << ", Percentage: " << s1.percentage() << "%" << std::endl;
+    std::cout << "Student 2 Average: " << s2.average() << ", Percentage: " << s2.percentage() << "%" << std::endl;
+    std::cout << "Student 3 Average: " << s3.average() << ", Percentage: " << s3.percentage() << "%" << std::endl;
+
+    return 0;
+}
