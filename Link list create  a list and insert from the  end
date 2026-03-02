@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void insertAtEnd(Node*& head, int newValue) {
+    Node* newNode = new Node();
+    newNode->data = newValue;
+    newNode->next = nullptr;
+    if (head == nullptr) {
+        head = newNode;
+        return;
+    }
+    Node* last = head;
+    while (last->next != nullptr) {
+        last = last->next;
+    }
+    last->next = newNode;
+}
+
+
+void displayList(Node* head) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        cout << temp->data << " ";
+        temp = temp->next;
+    }
+    cout << endl;
+}
+int main() {
+    Node* head = nullptr;
+    insertAtEnd(head, 10);
+    insertAtEnd(head, 20);
+    insertAtEnd(head, 30);
+    cout << "Linked list after insertion at end: ";
+    displayList(head);
+    return 0;
+}
