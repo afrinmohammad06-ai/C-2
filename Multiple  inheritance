@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+class AcademicRecord {
+protected:
+    double marks;
+
+public:
+    AcademicRecord(double m) : marks(m) {}
+};
+
+class SportsRecord {
+protected:
+    double scores;
+
+public:
+    SportsRecord(double s) : scores(s) {}
+};
+
+// Multiple Inheritance
+class Student : public AcademicRecord, public SportsRecord {
+private:
+    std::string name;
+
+public:
+    Student(std::string n, double m, double s) 
+        : name(n), AcademicRecord(m), SportsRecord(s) {}
+
+    void display_results() const {
+        std::cout << "Student Name: " << name << std::endl;
+        std::cout << "Academic Marks: " << marks << std::endl;
+        std::cout << "Sports Score: " << scores << std::endl;
+        std::cout << "Consolidated Performance: " << (marks + scores) / 2.0 << std::endl;
+    }
+};
+
+int main() {
+    Student s1("Alice", 85.5, 90.0);
+    s1.display_results();
+
+    return 0;
+}
