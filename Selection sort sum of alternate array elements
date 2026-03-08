@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+// Function to calculate the sum of alternate elements
+int sumAlternate(int arr[], int n) {
+    int sum = 0;
+    for (int i = 0; i < n; i += 2) {
+        sum += arr[i];
+    }
+    return sum;
+}
+
+int main() {
+    int arr[] = {58, 23, 16, 25, 19}; // Example array
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Original array: ";
+    for (int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    int alternateSum = sumAlternate(arr, n);
+
+    cout << "Sum of alternate elements: " << alternateSum << endl;
+
+    return 0;
+}
