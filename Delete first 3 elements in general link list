@@ -1,0 +1,108 @@
+#include <iostream>
+
+// Generic Node structure
+template <typename T>
+struct Node {
+    T data;
+    Node* next;
+
+    Node(T val) : data(val), next(nullptr) {}
+};
+
+// Generic Singly Linked List class
+template <typename T>
+class LinkedList {
+private:
+    Node<T>* head;
+
+public:
+    LinkedList() : head(nullptr) {}
+
+    // Function to add a new node to the end of the list
+    void append(T data) {
+        Node<T>* newNode = new Node<T>(data);
+        if (!head) {
+            head = newNode;
+            return;
+        }
+        Node<T>* temp = head;
+        while (temp->next) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+    }
+
+    // Function to delete the first 'count' elements
+    void deleteFirstNElements(int count) {
+        if (!head || count <= 0) return;
+
+        Node<T>* current = head;
+        Node<T>* nextNode = nullptr;
+        int deletedCount = 0;
+
+        while (current != nullptr && deletedCount < count) {
+            nextNode = current->next;
+            delete current; // Free memory of the current node
+            current = nextNode;
+            deletedCount++;
+        }
+
+        // Update the head pointer to the fourth element (if count was 3)
+        head = current;
+
+        if (deletedCount == count) {
+            std::cout << "Deleted the first " << count << " elements successfully." << std::endl;
+        } else {
+            std::cout << "List had fewer than " << count << " elements. Deleted all available." << std::endl;
+        }
+    }
+
+    // Function to print the list
+    void display() {
+        Node<T>* temp = head;
+        if (!temp) {
+            std::cout << "The list is empty." << std::endl;
+            return;
+        }
+        while (temp) {
+            std::cout << temp->data << (temp->next ? " -> " : "");
+            temp = temp->next;
+        }
+        std::cout << std::endl;
+    }
+
+    // Destructor to free all memory
+    ~LinkedList() {
+        Node<T>* current = head;
+        Node<T>* nextNode = nullptr;
+        while (current != nullptr) {
+            nextNode = current->next;
+            delete current;
+            current = nextNode;
+        }
+        head = nullptr;
+    }
+};
+
+// Main function to test the program
+int main() {
+    LinkedList<int> myList;
+
+    // Append at least 4 elements
+    myList.append(10);
+    myList.append(20);
+    myList.append(30);
+    myList.append(40);
+    myList.append(50);
+
+    std::cout << "Original list: ";
+    myList.display();
+
+    // Delete the first 3 elements
+    myList.deleteFirstNElements(3);
+
+    std::cout << "List after deleting first 3 elements: ";
+    myList.display();
+
+    return 0;
+}
