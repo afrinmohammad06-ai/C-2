@@ -1,0 +1,48 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* next;
+};
+
+void deleteValue(Node*& head, int val) {
+    if (!head) return;
+
+    Node* curr = head;
+    Node* prev = NULL;
+
+    do {
+        if (curr->data == val) {
+
+            if (curr->next == curr) {
+                delete curr;
+                head = NULL;
+                return;
+            }
+
+            if (curr == head) {
+                Node* last = head;
+                while (last->next != head)
+                    last = last->next;
+
+                head = head->next;
+                last->next = head;
+                delete curr;
+                return;
+            }
+
+            prev->next = curr->next;
+            delete curr;
+            return;
+        }
+
+        prev = curr;
+        curr = curr->next;
+
+    } while (curr != head);
+}
+
+int main() {
+    Node* head = NULL;
+}
