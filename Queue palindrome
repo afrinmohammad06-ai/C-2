@@ -1,0 +1,56 @@
+#include <iostream>
+using namespace std;
+
+#define MAX 100
+
+class Queue {
+    int arr[MAX];
+    int front, rear;
+
+public:
+    Queue() {
+        front = 0;
+        rear = -1;
+    }
+
+    void enqueue(int x) {
+        arr[++rear] = x;
+    }
+
+    bool isPalindrome() {
+        int i = front, j = rear;
+
+        while (i < j) {
+            if (arr[i] != arr[j])
+                return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
+
+    void display() {
+        for (int i = front; i <= rear; i++)
+            cout << arr[i] << " ";
+        cout << endl;
+    }
+};
+
+int main() {
+    Queue q;
+
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(2);
+    q.enqueue(1);
+
+    q.display();
+
+    if (q.isPalindrome())
+        cout << "Palindrome Queue\n";
+    else
+        cout << "Not Palindrome\n";
+
+    return 0;
+}
