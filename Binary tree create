@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+Node* createTree() {
+    int value;
+    cout << "Enter value (-1 for no node): ";
+    cin >> value;
+    if (value == -1)
+        return NULL;
+    Node* root = new Node();
+    root->data = value;
+    cout << "Enter left child of " << value << endl;
+    root->left = createTree();
+
+    cout << "Enter right child of " << value << endl;
+    root->right = createTree();
+
+    return root;
+}
+
+int main() {
+    cout << "Create Binary Tree:\n";
+    Node* root = createTree();
+
+    return 0;
+}
