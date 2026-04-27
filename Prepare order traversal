@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+struct Node {
+    int data;
+    Node* left;
+    Node* right;
+};
+
+// Create node
+Node* create(int val) {
+    Node* temp = new Node();
+    temp->data = val;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+// Insert (BST style)
+Node* insert(Node* root, int val) {
+    if (root == NULL) return create(val);
+
+    if (val < root->data)
+        root->left = insert(root->left, val);
+    else
+        root->right = insert(root->right, val);
+
+    return root;
+}
+
+// Preorder traversal
+void preorder(Node* root) {
+    if (root == NULL) return;
+
+    cout << root->data << " ";
+    preorder(root->left);
+    preorder(root->right);
+}
+
+int main() {
+    Node* root = NULL;
+
+    root = insert(root, 50);
+    root = insert(root, 30);
+    root = insert(root, 70);
+
+    cout << "Preorder Traversal: ";
+    preorder(root);
+
+    return 0;
+}
